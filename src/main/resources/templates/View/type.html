@@ -1,0 +1,125 @@
+<section id="main-content" th:fragment="type">
+  <style>
+    .button{
+      cursor: pointer;
+      display: inline-block;
+
+    }
+  </style>
+  
+  <a  href="#test"><i style="font-size: 50px; " class="mdi mdi-plus-circle"></i></a>
+  <table style="width: 100%;" class="table-bordered table-responsive-md">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Thématique</th>
+        <th>Numéro</th>
+        <th>MG</th>
+        <th>FR</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="type:${TypeThematique}">
+        <form method="POST">
+          <td>
+            <input style="border-color: white;" class="form-control" type="text" name="nomtypeMod"
+              th:value="${type.nomType}">
+          </td>
+          <td>
+            <select style="border-color: white;" class="form-control" name="idthematiqueMod">
+              <option th:value="${type.idThematique}" th:text="${type.nomThematique}"></option>
+              <option th:each="thematique:${Thematiques}" th:text="${thematique.nomThematique}"
+                th:value="${thematique.id}"></option>
+            </select>
+          </td>
+          <td>
+            <input class="form-control" type="hidden" name="id" th:value="${type.id}">
+            <input style="border-color: white;" class="form-control" type="text" name="numberMod"
+              th:value="${type.number}">
+          </td>
+          <td>
+            <a th:href="@{pdf/{fr}(fr=${type.contentMG+'.pdf.html'})}">
+              <i style="font-size: 30px;" class="mdi mdi-eye"></i>
+            </a>
+            <!-- <input class="form-control" type="text" name="contenumgMod" th:value="${type.contentMG}"> -->
+          </td>
+          <td>
+            <a th:href="@{pdf/{fr}(fr=${type.contentFR+'.pdf.html'})}">
+              <i style="font-size: 30px;" class="mdi mdi-eye"></i>
+            </a>
+            <!-- <input class="form-control" type="text" name="contenufrMod" th:value="${type.contentFR}"> -->
+          </td>
+          <td>
+            <button style="background-color: #009455; border-color: #009455;" class="btn btn-primary mr-2"><i
+                class="mdi mdi-lead-pencil"></i></button>
+          </td>
+          </td>
+          <td>
+            <a style="background-color: #eb595f; border-color: #eb595f;" class="btn btn-primary mr-2"
+              th:href="@{/type?idSupp={idSupp}(idSupp=${type.id})}"><i class="mdi mdi-delete"></i></a>
+          </td>
+        </form>
+      </tr>
+    </tbody>
+  </table>
+  <div id="test">
+    <form method="POST" action="/upload" enctype="multipart/form-data">
+      <div style="width: 80%; margin: 2%;">
+        <label for="">Type </label>
+        <input required style="width: 100%;" class="form-control" type="text" name="nomtype" placeholder="nom type">
+      </div>
+      <div style="width: 80%; margin: 2%;">
+        <label for="">Thématique </label>
+        <select required class="form-control" name="idthematique">
+          <option value="0">Thématique</option>
+          <option th:each="thematique:${Thematiques}" th:text="${thematique.nomThematique}" th:value="${thematique.id}">
+          </option>
+        </select>
+      </div>
+      <div style="width: 80%; margin: 2%;">
+        <label for="">Numéro </label>
+        <input required class="form-control" type="text" name="number" placeholder="Numéro ex: N°XX-XX">
+      </div>
+      <div style="width: 80%; margin: 2%;">
+        <label for="">Objet </label>
+        <input required class="form-control" type="text" name="subject" placeholder="Objet">
+      </div>
+      <div style="width: 80%; margin: 2%;">
+        <label for="">Status </label>
+        <select required class="form-control" name="state">
+          <option value="0">En vigeur</option>
+          <option value="1">Non en vigeur</option>
+          </option>
+        </select>
+      </div>
+      <div style="width: 80%; margin: 2%;">
+        <label for="">Notes </label>
+        <input required class="form-control" type="text" name="notes" placeholder="Objet">
+      </div>
+      <div style="width: 80%; margin: 2%;">
+        <label for="">Source </label>
+        <input required class="form-control" type="text" name="sources" placeholder="Objet">
+      </div>
+      <div style="width: 80%; margin: 2%;">
+        <label for="">Contenu en Malagasy </label>
+        <input required class="form-control" type="file" name="fileMG" placeholder="Objet">
+      </div>
+      <div style="width: 80%; margin: 2%;">
+        <label for="">Contenu en Français </label>
+        <input required class="form-control" type="file" name="fileFR" placeholder="Objet">
+      </div>
+      <!-- <div style="width: 80%; margin: 2%;">
+      <label for="">Icon </label>
+      <input required class="form-control" type="text" name="icon" placeholder="Objet">
+    </div> -->
+      <div style="width: 80%; margin: 2%; text-align: center; margin-top: 1%;">
+        <button class="btn btn-primary mr-2" style="width: 50%; background-color: #009455; border-color: #009455;"> VALIDER </button>
+      </div>
+    </form>
+  </div>
+  <!-- <form method="POST">
+    <textbreb name="pdf1" id="pdf1" cols="30" rows="10"></textarea>
+    <textarea name="pdf2" id="pdf2" cols="30" rows="10"></textarea>
+    <button>Valider</button>
+  </form> -->
+</section>

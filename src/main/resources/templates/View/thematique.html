@@ -1,0 +1,34 @@
+<section id="main-content" th:fragment="thematique">
+    <form method="POST">
+        <h2>Ajouter une thématique</h2>
+        <input class="form-control" type="text" name="nomThematique" placeholder="thématique">
+        <div style="width: 80%; margin: 2%; text-align: center; margin-top: 1%;">
+            <button class="btn btn-primary mr-2" style="width: 50%; background-color: #009455; border-color: #009455;"> VALIDER </button>
+        </div>
+    </form>
+    <table style="width: 100%;" class="table-bordered table-responsive-md">
+        <thead>
+            <tr>
+                <th>Thématique</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="thematique:${Thematiques}">
+                <form method="POST" style="width: 100%;">
+                    <td>
+                        <input class="form-control" type="hidden" name="id" th:value="${thematique.id}">
+                        <input style="border-color: white;" class="form-control" type="text" name="nomThematique"
+                            th:value="${thematique.nomThematique}">
+                    </td>
+                    <td>
+                        <button style="background-color: #009455; width: 50%; border-color: #009455;" class="btn btn-primary mr-2"><i class="mdi mdi-lead-pencil"></i></button>
+                    </td>
+                    <td>
+                        <a style="background-color: #eb595f; width: 50%; border-color: #eb595f;" class="btn btn-primary mr-2" th:href="@{/thematique?idSupp={idSupp}(idSupp=${thematique.id})}"><i
+                            class="mdi mdi-delete"></i></a>
+                    </td>
+                </form>
+            </tr>
+        </tbody>
+    </table>
+</section>

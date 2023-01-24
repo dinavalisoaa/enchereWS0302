@@ -91,12 +91,12 @@ public class TokenHandler {
         TokenHandler token = new TokenHandler();
         try {
             Claims cl = Jwts.parser().setSigningKey(TokenHandler.keyToken)
-                    .parseClaimsJws(tok).getBody();
+            .parseClaimsJws(tok).getBody();
             int idutilisateur = Integer.parseInt(cl.get("idutilisateur").toString());
             token.setUtilisateur(idutilisateur);
             token.setToken(tok);
         } catch (Exception f) {
-            throw new Exception("loginerror");
+            throw new Exception("loginerror ");
         }
         return token;
     }

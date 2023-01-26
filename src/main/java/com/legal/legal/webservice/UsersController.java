@@ -94,7 +94,6 @@ public class UsersController {
         vao.setPrenom(prenom);
         vao.insert(null);
         _val_.put("data", new Message(new Success(vao.getLastID(), "Create Ok")));
-//        String texte = gson.toJson(new Users().select(null));
         return gson.toJson(_val_);
     }
 
@@ -116,7 +115,6 @@ public class UsersController {
         }
         zateur.setId(id);
         try {
-//            String oi = new TokenHandler().CreerToken(id);
             _val_.put("datas", new Success(id, "ww"));
         } catch (Exception xc) {
             _val_.put("datas", new Fail("", xc.getMessage()));
@@ -146,7 +144,6 @@ public class UsersController {
             com.insert(null);
             int id = zateur.getLastID();
             zateur.setId(id);
-//            String oi = new TokenHandler().CreerToken(id);
             _val_.put("datas", new Success(id, "ww"));
             return gson.toJson(_val_);
         } catch (Exception xc) {

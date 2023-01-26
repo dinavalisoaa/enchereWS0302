@@ -72,29 +72,13 @@ public class EnchereService {
             Enchere get = alls.get(i);
             Users vo = new Users();
             vo.setId(get.getUsersId());
-//            Categorie gorie = new Categorie();
-//            gorie.setId(get.getCategorieId());
-//            get.setCat(gorie.getCategorie(con));
-//            get.setUser(vo.getUsers(con));
+
             get.setPhoto(get.getPhoto());
             get.setDateFarany(get.getDateFarany());
             get.setDepuis(get.getDepuis());
             all.add(get);
         }
         
-//          EncherePhoto g = new EncherePhoto();
-//            g.setEnchereId(uu.getId());
-//            uu.setDateFarany(uu.getDateFarany());
-//            uu.setDepuis(uu.getDepuis());
-//            Users u_=new Users();
-//            u_.setId(uu.getUsersId());
-//            uu.setUser(u_.getUsers(con));
-//            uu.setExpiration(uu.getExpiration());
-//            uu.setPhoto(g.select(con));
-//            Categorie gorie = new Categorie();
-//            gorie.setId(uu.getCategorieId());
-//            uu.setCat(gorie.getCategorie(con));
-//            touss.add(uu);
         _val_.put("data", all);
         con.close();
           /*Enchere.checkDepassement();*/

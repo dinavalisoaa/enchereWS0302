@@ -60,7 +60,6 @@ public class EnchereService {
     @GetMapping("encheres")
     String getALl() throws Exception {
         Enchere am = new Enchere();
-//        am.setUser/sId(id);
         Gson gson = new Gson();
         Connection con = Connexion.getConn();
 
@@ -118,8 +117,7 @@ public class EnchereService {
         }
         _val_.put("data", touss);
         con.close();
-        
-          /*Enchere.checkDepassement();*/
+    //ce        
         return gson.toJson(_val_);
     }
 

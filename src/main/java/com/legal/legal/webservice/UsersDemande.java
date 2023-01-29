@@ -53,7 +53,7 @@ public class UsersDemande {
             @PathVariable int idusers) throws Exception {
         Gson gson = new Gson();
         String texte = "";// gson.toJson(new Message(new Success(idKilo, "Success")));
-
+    ArrayList<EnchereMove>test=new ArrayList();
         DemandeRechargement move = new DemandeRechargement();
         move.setUsersId(idusers);
         move.setId(id);

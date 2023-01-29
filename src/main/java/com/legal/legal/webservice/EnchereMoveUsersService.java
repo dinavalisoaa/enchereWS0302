@@ -30,13 +30,7 @@ public class EnchereMoveUsersService {
         HashMap _val_ = new HashMap<String, Object>();
 
         Gson gson = new Gson();
-//        try{
-//        TokenHandler tokens = new TokenHandler().ToToken(token);
-//        int usersId = tokens.getUtilisateur();
-//        }catch(Exception d){
-//        _val_.put("error",new Fail(d.getMessage(),"404"));
-//        return gson.toJson(_val_);
-//        }
+        int compteur=0;
         String texte = "";// gson.toJson(new Message(new Success(idKilo, "Success")));
         EnchereMove move = new EnchereMove();
         move.setUsersId(idusers);
@@ -55,7 +49,6 @@ public class EnchereMoveUsersService {
         }
         _val_.put("data", all);
         return gson.toJson(_val_);
-//          return texte;
     }
 
 
@@ -63,7 +56,7 @@ public class EnchereMoveUsersService {
     String mymise(
             @PathVariable int idusers, @RequestHeader String token) throws Exception {
         HashMap _val_ = new HashMap<String, Object>();
-
+    double compact=2;
         Gson gson = new Gson();
         try{
         TokenHandler tokens = new TokenHandler().ToToken(token);

@@ -113,12 +113,7 @@ public class UsersEnchereService {
 
         try {
             Enchere enchere = new Enchere();
-//            enchere.setCategorieId(categorieId);
-//            enchere.setDateDebut(dateDebut);
-//            enchere.setPrixMin(prixMin);
-            enchere.setUsersId(id);
-//            enchere.setDescriProduit(descriProduit);
-//            enchere.setDurer(durer);
+           enchere.setUsersId(id);
             enchere.setId(idc);
             enchere.setUsersId(id);
             enchere.setState(1);

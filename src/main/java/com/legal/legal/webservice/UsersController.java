@@ -25,8 +25,6 @@ import utils.Success;
 @RestController
 @CrossOrigin
 public class UsersController {
-//    @CrossOrigin
-
 
 
     @GetMapping("/usersencheres/{id}")
@@ -49,12 +47,7 @@ public class UsersController {
             phd.setEnchereId(get.getId());
             ArrayList<EncherePhoto> hdas = phd.select(con);
             get.setPhoto(hdas);
-//            vo.setId(get.getUsersId());
             Categorie gorie = new Categorie();
-//            gorie.setId(get.getCategorieId());
-//            get.setCat(gorie.getCategorie(con));
-//            get.setUser(vo.getUsers(con));
-//            get.setPhoto(get.getPhoto());
             get.setDateFarany(get.getDateFarany());
             get.setDepuis(get.getDepuis());
             all.add(get);
@@ -170,90 +163,4 @@ public class UsersController {
         return texte;
     }
 
-    /*
-    public void doFilter(ServletRequest r equest, ServletResponse response, FilterChain chain)
-            throws IOException, ServletException {
-        // TODO Auto-generated method stub
-        HttpServletRequest req = (HttpServletRequest) request;
-        HttpServletResponse res = (HttpServletResponse) response;
-        final String requestTokenHeader = req.getHeader("Authorization");
-
-        String username = null;
-        String jwtToken = null;
-        // JWT Token is in the form "Bearer token". Remove Bearer word and get only the Token
-        if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
-            jwtToken = requestTokenHeader.substring(7);
-            try {
-                username = new TokenUtil().getUsernameFromToken(jwtToken);
-            } catch (IllegalArgumentException e) {
-                System.out.println("Unable to get JWT Token");
-            } catch (ExpiredJwtException e) {
-                System.out.println("JWT Token has expired");
-            }
-        } else {
-            System.out.println("JWT Token does not begin with Bearer String");
-        }
-
-        //Once we get the token validate it.
-        if (username != null) {
-            String userDetails = "Dina";
-//			UserDetails userDetails = this.jwtUserDetailsService.loadUserByUsername(username);
-
-            // if token is valid configure Spring Security to manually set authentication
-            if (new TokenUtil().validateToken(jwtToken, userDetails)) {
-
-//				UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
-//						userDetails, null, userDetails.getAuthorities());
-//				usernamePasswordAuthenticationToken
-//						.setDetails(new WebAuthenticationDetailsSource().buildDetails(req));
-                // After setting the Authentication in the context, we specify
-//				 that the current user is authenticated. So it passes the Spring Security Configurations successfully.
-//				SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
-            }
-        }
-        chain.doFilter(req, res);
-    }*/
-//    @GetMapping("/home")
-//    String baerer(@RequestParam int id) throws Exception {
-//
-//        Tokens montoken = new Tokens();
-//
-//        Gson gson = new Gson();
-//        montoken.setUsersId(id);
-//        ArrayList tokenS = montoken.select(null);
-//        Tokens currents = (Tokens) tokenS.get(0);
-//        String hash1 = Tokens.sha1(currents.getToken() + "GET /home");
-//        String json = "";
-//        try {
-//            json = "";
-//            json = gson.toJson(new Message(new Success(hash1, id)));
-//
-//        } catch (Exception ex) {
-//            json = gson.toJson(new Message(new Fail("not Found", "404")));
-//        }
-//        return json;
-//
-//    }
-//    @GetMapping("/deconnexion")
-//    String decon(@RequestParam int id) throws Exception {
-//        Tokens montoken = new Tokens();
-//        Gson gson = new Gson();
-//        
-//        montoken.setUsersId(id);
-//        montoken.setDateExp(Tokens.getCurrentTimestamp().split("\\.")[0]);
-//        Tokens montokens = new Tokens();
-//        montokens.setUsersId(id);
-//        montokens.setUsersId(id);
-//        montokens.update("utilisateurId", null);
-//        String json = "";
-//        try {
-//            montoken.update("utilisateurId", null);
-//            json = gson.toJson(new Message(new Success(0, "Success")));
-//        } catch (Exception ex) {
-//            json = gson.toJson(new Message(new Fail("not Found", "404")));
-//            
-//        }
-//        return json;
-//        
-//    }
 }

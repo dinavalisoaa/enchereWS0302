@@ -20,7 +20,7 @@ public class Connexion {
 //        connectionSQL = DriverManager.getConnection(connectionUrl);
                    connectionSQL = DriverManager.getConnection("jdbc:postgresql://localhost:5432/enchere", "dina", "dina");
 //            connectionSQL = DriverManager.getConnection("jdbc:postgresql://postgresql-anjara.alwaysdata.net:5432/anjara_1", "anjara", "4004675004");
-//             connectionSQL = DriverManager.getConnection("jdbc:postgresql://containers-us-west-34.railway.app:6623/railway", "postgres", "EuteiYYg9jwLQZ5pNoRV");
+            connectionSQL = DriverManager.getConnection("jdbc:postgresql://containers-us-west-34.railway.app:6623/railway", "postgres", "EuteiYYg9jwLQZ5pNoRV");
 
             System.out.println("Driver O.K.");
         } catch (Exception e) {

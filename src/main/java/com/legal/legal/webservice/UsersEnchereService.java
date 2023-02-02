@@ -410,7 +410,6 @@ public class UsersEnchereService {
 
         Gson gson = new Gson();
         try {
-//            TokenHandler tokens = new TokenHandler().ToToken(token);
             int usersId = 1;//tokens.getUtilisateur();
             System.err.println(usersId);
         } catch (Exception d) {

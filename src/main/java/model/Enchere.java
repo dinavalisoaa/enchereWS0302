@@ -33,6 +33,8 @@ public class Enchere extends ObjectBDD {
     private String descriProduit;
     private double durer = -1;
     @Ignore
+    int nbTest=-1;
+    @Ignore
     double prixMax=-1;
     @Ignore
     String dateFarany;
@@ -394,6 +396,35 @@ public class Enchere extends ObjectBDD {
         return this.dateDebut;
     }
 
+    public int getEnchereMovesGagnantId() throws SQLException, Exception {
+        Users valiny = new Users();
+        EnchereMove users = new EnchereMove();
+        Connection connection = null;
+        int id = 0;
+        try {
+            connection = Connexion.getConn();
+            String sql = "select * from encheremove\n"
+                    + "where encheremove.enchereid=" + this.getId() + "\n"
+                    + "and encheremove.prixmise in(\n"
+                    + "select max(prixmise) as maximum from encheremove  \n"
+                    + "where encheremove.enchereid=" + this.getId() + "\n"
+                    + "group by enchereid\n"
+                    + ") ";
+            System.out.println(sql);
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                id = resultSet.getInt("id");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            connection.close();
+        }
+        return id;
+
+    }
     /**
      *
      * @param dateDebut
@@ -474,6 +505,33 @@ public class Enchere extends ObjectBDD {
 
         this.durer = durer;
     }
+//add gagna
+    public int getNbUserVisit() throws SQLException, Exception {
+        Users valiny = new Users();
+        Users users = new Users();
+        Connection connection = null;
+        int j = 0;
+        try {
+            connection = Connexion.getConn();
+            String sql = "select count(distinct(usersid)) as in from encheremove where enchereid=" + this.getId() + "";
+            System.out.println(sql);
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                j = resultSet.getInt("in");
+//                users.setId(resultSet.getInt("usersid"));
+//                users.setMiseGagnant(resultSet.getDouble("prixmise"));
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            connection.close();
+//            return users;
+        }
+        return j;
+    }
 
     public Users getGagnant() throws SQLException, Exception {
         Users valiny = new Users();
@@ -509,62 +567,6 @@ public class Enchere extends ObjectBDD {
         }
     }
 
-    public int getNbUserVisit() throws SQLException, Exception {
-        Users valiny = new Users();
-        Users users = new Users();
-        Connection connection = null;
-        int j = 0;
-        try {
-            connection = Connexion.getConn();
-            String sql = "select count(distinct(usersid)) as in from encheremove where enchereid=" + this.getId() + "";
-            System.out.println(sql);
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                j = resultSet.getInt("in");
-//                users.setId(resultSet.getInt("usersid"));
-//                users.setMiseGagnant(resultSet.getDouble("prixmise"));
-
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw e;
-        } finally {
-            connection.close();
-//            return users;
-        }
-        return j;
-    }
-
-    public int getEnchereMovesGagnantId() throws SQLException, Exception {
-        Users valiny = new Users();
-        EnchereMove users = new EnchereMove();
-        Connection connection = null;
-        int id = 0;
-        try {
-            connection = Connexion.getConn();
-            String sql = "select * from encheremove\n"
-                    + "where encheremove.enchereid=" + this.getId() + "\n"
-                    + "and encheremove.prixmise in(\n"
-                    + "select max(prixmise) as maximum from encheremove  \n"
-                    + "where encheremove.enchereid=" + this.getId() + "\n"
-                    + "group by enchereid\n"
-                    + ") ";
-            System.out.println(sql);
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                id = resultSet.getInt("id");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw e;
-        } finally {
-            connection.close();
-        }
-        return id;
-
-    }
 
     public int getEnchereVitany() throws SQLException {
         int valiny = 0;

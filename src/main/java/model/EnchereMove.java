@@ -59,6 +59,36 @@ public class EnchereMove extends ObjectBDD {
         return user;
     }
 
+
+    public static void setTransaction(EnchereMove move, int idEnchere) throws Exception {
+        try{
+        Enchere encours = new Enchere();
+        encours.setId(idEnchere);
+        Connection con = Connexion.getConn();
+        double d = move.getPrixMise();
+        EnchereMove taken = new EnchereMove();
+        taken.setPrixMise(d);
+        EnchereMove avantWinner = encours.getEnchereMovesGagnantId(con);
+        EnchereMove mo = move.lastMove(con);
+        System.err.println("```````````````````````" + mo);
+        if (mo != null) {
+            if (mo.getPrixMise() >= d) {
+                throw new Exception("Miser plus que " + mo.getPrixMise());
+            }
+        }
+        taken.setEnchereId(idEnchere);
+        taken.setUsersId(move.getUsersId());
+        if (avantWinner != null) {
+            credite(avantWinner);
+        }
+        taken.insert(con);
+        EnchereMove lastwinner = encours.getEnchereMovesGagnantId(con);
+        debite(move.lastMove(con));
+        con.close();
+        }catch(Exception ex){
+        throw  ex;
+        }
+    }
     public void insert(Connection con) throws Exception {
         this.setCommissionId(new Commission().getCurrentId().getId());
         super.insert(con);
@@ -140,36 +170,6 @@ public class EnchereMove extends ObjectBDD {
             return null;
         }
         return (li.get(0));
-    }
-
-    public static void setTransaction(EnchereMove move, int idEnchere) throws Exception {
-        try{
-        Enchere encours = new Enchere();
-        encours.setId(idEnchere);
-        Connection con = Connexion.getConn();
-        double d = move.getPrixMise();
-        EnchereMove taken = new EnchereMove();
-        taken.setPrixMise(d);
-        EnchereMove avantWinner = encours.getEnchereMovesGagnantId(con);
-        EnchereMove mo = move.lastMove(con);
-        System.err.println("```````````````````````" + mo);
-        if (mo != null) {
-            if (mo.getPrixMise() >= d) {
-                throw new Exception("Miser plus que " + mo.getPrixMise());
-            }
-        }
-        taken.setEnchereId(idEnchere);
-        taken.setUsersId(move.getUsersId());
-        if (avantWinner != null) {
-            credite(avantWinner);
-        }
-        taken.insert(con);
-        EnchereMove lastwinner = encours.getEnchereMovesGagnantId(con);
-        debite(move.lastMove(con));
-        con.close();
-        }catch(Exception ex){
-        throw  ex;
-        }
     }
    public Enchere getEncheres() throws Exception {
         Enchere us = new Enchere();

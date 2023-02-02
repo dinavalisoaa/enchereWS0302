@@ -240,28 +240,6 @@ public class Users extends ObjectBDD {
         }
     }
 
-    public double getEnchereEffectuer(Connection con) throws SQLException {
-        ArrayList<Users> valiny = new ArrayList();
-        Users users = new Users();
-        users.setId(this.id);
-
-        try {
-            String sql = "select count(*) as sum from encheremove where  usersId=" + this.id + "\n";
-//                    + "group by usersid";
-            PreparedStatement preparedStatement = con.prepareStatement(sql);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-//                users.setId(resultSet.getInt("usersid"));
-                //System.out.println(resultSet.getInt("usersid"));
-                users.setNbEnchereFait(resultSet.getInt("sum"));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw e;
-        } finally {
-            return users.getNbEnchereFait();
-        }
-    }
 
     public double getEfficacite(Connection con) throws Exception {
         double win = getNbEnchereGagner(con);
@@ -314,6 +292,28 @@ public class Users extends ObjectBDD {
         return nbrechargeCompte;
     }
 
+    public double getEnchereEffectuer(Connection con) throws SQLException {
+        ArrayList<Users> valiny = new ArrayList();
+        Users users = new Users();
+        users.setId(this.id);
+
+        try {
+            String sql = "select count(*) as sum from encheremove where  usersId=" + this.id + "\n";
+//                    + "group by usersid";
+            PreparedStatement preparedStatement = con.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+//                users.setId(resultSet.getInt("usersid"));
+                //System.out.println(resultSet.getInt("usersid"));
+                users.setNbEnchereFait(resultSet.getInt("sum"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            return users.getNbEnchereFait();
+        }
+    }
     public void setNbrechargeCompte(int nbrechargeCompte) {
         this.nbrechargeCompte = nbrechargeCompte;
     }

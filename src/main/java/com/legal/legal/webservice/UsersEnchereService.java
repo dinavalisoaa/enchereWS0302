@@ -237,10 +237,6 @@ public class UsersEnchereService {
         Enchere am = new Enchere();
         am.setUsersId(id);
         Connection con = Connexion.getConn();
-//        String key = "";
-//        if (rq.getParameter("key") != null) {
-//            key = rq.getParameter("key");
-//        }
         ArrayList<Enchere> tous = am.selectBySQL("select *from enchere en join categorie cat on cat.id=en.categorieid where descriproduit like '%" + key + "%' or cat.nom like '%" + key + "%'  and usersId=" + id + " order by en.id desc", con);
         ArrayList<Enchere> touss = new ArrayList<>();
         for (int i = 0; i < tous.size(); i++) {
@@ -288,12 +284,8 @@ public class UsersEnchereService {
             uu.setDepuis(uu.getDepuis());
             Users u_ = new Users();
             u_.setId(uu.getUsersId());
-//            uu.setUser(u_.getUsers(con));
             uu.setExpiration(uu.getExpiration());
             uu.setPhoto(g.select(con));
-//            Categorie gorie = new Categorie();
-//            gorie.setId(uu.getCategorieId());
-//            uu.setCat(gorie.getCategorie(con));
             touss.add(uu);
         }
         _val_.put("data", touss);
@@ -307,14 +299,6 @@ public class UsersEnchereService {
         HashMap _val_ = new HashMap<String, Object>();
 
         Gson gson = new Gson();
-//        try {
-////            TokenHandler token//s = new TokenHandler().ToToken(token);
-//            int usersId = 1;//tokens.getUtilisateur();
-//            System.err.println(usersId);
-//        } catch (Exception d) {
-//            _val_.put("error", new Fail(d.getMessage(), "404"));
-//            return gson.toJson(_val_);
-//        }
         Enchere am = new Enchere();
         am.setUsersId(id);
         Connection con = Connexion.getConn();
@@ -348,14 +332,6 @@ public class UsersEnchereService {
         HashMap _val_ = new HashMap<String, Object>();
 
         Gson gson = new Gson();
-//        try {
-//            TokenHandler tokens = new TokenHandler().ToToken(token);
-//            int usersId = tokens.getUtilisateur();
-//            System.err.println(usersId);
-//        } catch (Exception d) {
-//            _val_.put("error", new Fail(d.getMessage(), "404"));
-//            return gson.toJson(_val_);
-//        }
         Enchere am = new Enchere();
         am.setUsersId(id);
         Connection con = Connexion.getConn();

@@ -105,13 +105,13 @@ public class EnchereService {
                 uu.setDateFarany(uu.getDateFarany());
                 uu.setDepuis(uu.getDepuis());
                 Users u_ = new Users();
-//                u_.setId(uu.getUsersId());
+               u_.setId(uu.getUsersId());
 //                uu.setUser(u_.getUsers(con));
                 uu.setExpiration(uu.getExpiration());
                 uu.setPhoto(g.select(con));
-//                Categorie gorie = new Categorie();
-//                gorie.setId(uu.getCategorieId());
-//                uu.setCat(gorie.getCategorie(con));
+               Categorie gorie = new Categorie();
+               gorie.setId(uu.getCategorieId());
+               uu.setCat(gorie.getCategorie(con));
                 touss.add(uu);
             }
         }
@@ -123,11 +123,15 @@ public class EnchereService {
 
     @GetMapping("categories/users/{id}")
     String getcat(@PathVariable int id) throws Exception {
-        Enchere am = new Enchere();
+       
+       try{ Enchere am = new Enchere();
         Gson gson = new Gson();
         HashMap _val_ = new HashMap<String, Object>();
         _val_.put("data", new Categorie().selectBySQL(" select *From categorie where id in (select categorieid from enchere where usersid=" + id + ")", null));
         return gson.toJson(_val_);
+       }catch(Exception en){
+        return en.getMessage();
+       }
     }
 
     @GetMapping("encheres/{id}")
@@ -146,12 +150,12 @@ public class EnchereService {
             uu.setDateFarany(uu.getDateFarany());
             uu.setDepuis(uu.getDepuis());
             Users u_ = new Users();
-//            u_.setId(uu.getUsersId());
-//            uu.setUser(u_.getUsers(con));
+           u_.setId(uu.getUsersId());
+           uu.setUser(u_.getUsers(con));
             uu.setExpiration(uu.getExpiration());
             Categorie gorie = new Categorie();
-//            gorie.setId(uu.getCategorieId());
-//            uu.setCat(gorie.getCategorie(con));
+           gorie.setId(uu.getCategorieId());
+           uu.setCat(gorie.getCsategorie(con));
             touss.add(uu);
         }
         EncherePhoto g = new EncherePhoto();
@@ -169,22 +173,10 @@ public class EnchereService {
         Enchere am = new Enchere();
         am.setId(id);
         am = am.getEnchere();
-//        am.getGagnant();
         Gson gson = new Gson();
         HashMap _val_ = new HashMap<String, Object>();
         am.setUserGagnant(am.getGagnant());
-//         ArrayList<Enchere> all = new ArrayList<>();
-//            ArrayList<Enchere> alls =am.select(null);
-//            for (int i = 0; i < alls.size(); i++) {
-//                Enchere get = alls.get(i);
-//                Users vo = new Users();
-//                vo.setId(get.getUsersId());
-//                Categorie gorie=new Categorie();
-//                gorie.setId(get.getCategorieId());
-//                get.setCat(gorie.getCategorie());
-//                get.setUserGagnant(vo.getUsers());
-//                all.add(get);
-//            }
+
         _val_.put("data", am);
         return gson.toJson(_val_);
 

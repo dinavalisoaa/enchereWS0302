@@ -20,7 +20,7 @@ import utils.Success;
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 @RestController
 
-@CrossOrigin("https://buffallomedina-gelato-dina-6143.netlify.app")
+@CrossOrigin
 public class DemandeRechargementService {
 //creer son propres en Encheres
 

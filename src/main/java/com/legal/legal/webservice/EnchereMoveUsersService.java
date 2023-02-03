@@ -22,13 +22,10 @@ import utils.Success;
 @RestController
 @CrossOrigin
 public class EnchereMoveUsersService {
-//get Tout les mouvements d'enchere sur mes enchere
-
     @GetMapping("users/{idusers}/encheres/{id}/enchereMoves")
     String Create(
             @PathVariable int idusers, @PathVariable int id, @RequestHeader String token) throws Exception {
         HashMap _val_ = new HashMap<String, Object>();
-
         Gson gson = new Gson();
         int compteur=0;
         String texte = "";// gson.toJson(new Message(new Success(idKilo, "Success")));
@@ -86,7 +83,7 @@ public class EnchereMoveUsersService {
 //          return texte;
     }
 //get un mouvements d'enchere sur mes enchere 
-    @GetMapping("users/{idusers}/encheres/{id}/enchereMoves/{idm}")
+    @GetMapping("users/{idusers}/{id}/enchereMoves/{idm}")
     String gethOne(@PathVariable int id, @PathVariable int idusers, @PathVariable int idm, @RequestHeader String token) throws Exception {
         HashMap _val_ = new HashMap<String, Object>();
 
@@ -98,10 +95,12 @@ public class EnchereMoveUsersService {
         _val_.put("error",new Fail(d.getMessage(),"404"));
         return gson.toJson(_val_);
         }
+        try{
         EnchereMove am = new EnchereMove();
         am.setId(idm);
         am.setEnchereId(id);
         am.setUsersId(id);
+
 //        Gson gson = new Gson();
 //        String texte = gson.toJson(am.select(null));
 //        HashMap _val_ = new HashMap<String, Object>();
@@ -117,16 +116,8 @@ public class EnchereMoveUsersService {
             get.setEnchere(enchere.getEnchere());
             all.add(get);
         }
+        }catch(Exception e){throw e;}
         return gson.toJson(_val_);
     }
 
-//    @GetMapping("/users/{id}/encheres/{idc}")
-//    String getOneEnc(@PathVariable int id, @PathVariable int idc) throws Exception {
-//        Enchere am = new Enchere();
-//        am.setUsersId(id);
-//        am.setId(idc);
-//        Gson gson = new Gson();
-//        String texte = gson.toJson(am.select(null));
-//        return texte;
-//    }
 }
